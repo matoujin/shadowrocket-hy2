@@ -1,0 +1,53 @@
+#!name=魔戒 HY2 对齐 Mac
+#!desc=强制 Grok Bot / Cursor / xAI / GitHub / Claude 及所有外网走 hy2自动选择（兼容小写组名与带空格节点名）
+#!system=ios
+
+[Proxy Group]
+hy2自动选择 = url-test,url=http://www.gstatic.com/generate_204,interval=120,tolerance=50,timeout=5,policy-regex-filter=(?i)HY2
+HY2自动选择 = url-test,url=http://www.gstatic.com/generate_204,interval=120,tolerance=50,timeout=5,policy-regex-filter=(?i)HY2
+
+[Rule]
+DOMAIN-SUFFIX,cursor.sh,hy2自动选择
+DOMAIN-SUFFIX,cursor.com,hy2自动选择
+DOMAIN-SUFFIX,cursorapi.com,hy2自动选择
+DOMAIN-SUFFIX,cursor-cdn.com,hy2自动选择
+DOMAIN-KEYWORD,cursor,hy2自动选择
+DOMAIN-SUFFIX,anysphere.co,hy2自动选择
+DOMAIN-SUFFIX,grok.com,hy2自动选择
+DOMAIN-KEYWORD,grok,hy2自动选择
+DOMAIN-SUFFIX,x.ai,hy2自动选择
+DOMAIN-SUFFIX,workos.com,hy2自动选择
+DOMAIN-SUFFIX,sentry.io,hy2自动选择
+DOMAIN-SUFFIX,dmxapi.cn,hy2自动选择
+DOMAIN-SUFFIX,dmxapi.com,hy2自动选择
+DOMAIN-KEYWORD,dmxapi,hy2自动选择
+DOMAIN-SUFFIX,anthropic.com,hy2自动选择
+DOMAIN-SUFFIX,claude.ai,hy2自动选择
+DOMAIN-SUFFIX,claudeusercontent.com,hy2自动选择
+DOMAIN-SUFFIX,github.com,hy2自动选择
+DOMAIN-SUFFIX,githubusercontent.com,hy2自动选择
+DOMAIN-SUFFIX,githubassets.com,hy2自动选择
+DOMAIN-SUFFIX,github.io,hy2自动选择
+DOMAIN-SUFFIX,ghcr.io,hy2自动选择
+DOMAIN-SUFFIX,npm.pkg.github.com,hy2自动选择
+DOMAIN-SUFFIX,codeload.github.com,hy2自动选择
+DOMAIN-SUFFIX,api.github.com,hy2自动选择
+DOMAIN-SUFFIX,objects.githubusercontent.com,hy2自动选择
+DOMAIN-SUFFIX,raw.githubusercontent.com,hy2自动选择
+DOMAIN-SUFFIX,gitlab.com,hy2自动选择
+DOMAIN-SUFFIX,openai.com,hy2自动选择
+DOMAIN-SUFFIX,chatgpt.com,hy2自动选择
+DOMAIN-SUFFIX,google.com,hy2自动选择
+DOMAIN-SUFFIX,googleapis.com,hy2自动选择
+DOMAIN-SUFFIX,gstatic.com,hy2自动选择
+DOMAIN-SUFFIX,x.com,hy2自动选择
+DOMAIN-SUFFIX,twitter.com,hy2自动选择
+DOMAIN-SUFFIX,jd.com,DIRECT
+DOMAIN-SUFFIX,jd.cn,DIRECT
+DOMAIN-SUFFIX,jdcloud.com,DIRECT
+DOMAIN-SUFFIX,ai-api.jdcloud.com,DIRECT
+DOMAIN-SUFFIX,qq.com,DIRECT
+DOMAIN-SUFFIX,weixin.qq.com,DIRECT
+DOMAIN-SUFFIX,servicewechat.com,DIRECT
+GEOIP,CN,DIRECT
+FINAL,hy2自动选择
