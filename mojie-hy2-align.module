@@ -1,28 +1,30 @@
 #!name=魔戒 HY2 对齐 Mac
-#!desc=叠在魔戒订阅上用。HY2 测速优选；HY2 不可用时自动回落到 PROXY/直连，避免空组断网。
+#!desc=Grok Bot/Cursor/x.ai 强制直连（开代理会挂）；其余外网 HY2，失败回落 PROXY/直连。叠在魔戒订阅上用。
 #!system=ios
 
 [Proxy Group]
-# 先筛 HY2 节点做测速；外层 fallback 保证筛不到/全挂时仍能走 PROXY 或直连
 hy2节点 = url-test,url=http://www.gstatic.com/generate_204,interval=30,tolerance=30,timeout=3,policy-regex-filter=(?i)HY2
 hy2自动选择 = fallback,hy2节点,PROXY,DIRECT,url=http://www.gstatic.com/generate_204,interval=30,timeout=3
 HY2自动选择 = fallback,hy2节点,PROXY,DIRECT,url=http://www.gstatic.com/generate_204,interval=30,timeout=3
 
 [Rule]
-DOMAIN-SUFFIX,cursor.sh,hy2自动选择
-DOMAIN-SUFFIX,cursor.com,hy2自动选择
-DOMAIN-SUFFIX,cursorapi.com,hy2自动选择
-DOMAIN-SUFFIX,cursor-cdn.com,hy2自动选择
-DOMAIN-KEYWORD,cursor,hy2自动选择
-DOMAIN-SUFFIX,anysphere.co,hy2自动选择
-DOMAIN-SUFFIX,grok.com,hy2自动选择
-DOMAIN-KEYWORD,grok,hy2自动选择
-DOMAIN-SUFFIX,x.ai,hy2自动选择
-DOMAIN-SUFFIX,workos.com,hy2自动选择
-DOMAIN-SUFFIX,sentry.io,hy2自动选择
-DOMAIN-SUFFIX,dmxapi.cn,hy2自动选择
-DOMAIN-SUFFIX,dmxapi.com,hy2自动选择
-DOMAIN-KEYWORD,dmxapi,hy2自动选择
+# 0. Grok Bot 相关：开代理会挂、关代理正常 → 强制直连（放最前）
+DOMAIN-SUFFIX,cursor.sh,DIRECT
+DOMAIN-SUFFIX,cursor.com,DIRECT
+DOMAIN-SUFFIX,cursorapi.com,DIRECT
+DOMAIN-SUFFIX,cursor-cdn.com,DIRECT
+DOMAIN-KEYWORD,cursor,DIRECT
+DOMAIN-SUFFIX,anysphere.co,DIRECT
+DOMAIN-SUFFIX,grok.com,DIRECT
+DOMAIN-KEYWORD,grok,DIRECT
+DOMAIN-SUFFIX,x.ai,DIRECT
+DOMAIN-SUFFIX,workos.com,DIRECT
+DOMAIN-SUFFIX,sentry.io,DIRECT
+DOMAIN-SUFFIX,dmxapi.cn,DIRECT
+DOMAIN-SUFFIX,dmxapi.com,DIRECT
+DOMAIN-KEYWORD,dmxapi,DIRECT
+
+# 1. 其它常用外网走 HY2（带回落）
 DOMAIN-SUFFIX,anthropic.com,hy2自动选择
 DOMAIN-SUFFIX,claude.ai,hy2自动选择
 DOMAIN-SUFFIX,claudeusercontent.com,hy2自动选择
@@ -44,6 +46,8 @@ DOMAIN-SUFFIX,googleapis.com,hy2自动选择
 DOMAIN-SUFFIX,gstatic.com,hy2自动选择
 DOMAIN-SUFFIX,x.com,hy2自动选择
 DOMAIN-SUFFIX,twitter.com,hy2自动选择
+
+# 2. 国内直连
 DOMAIN-SUFFIX,jd.com,DIRECT
 DOMAIN-SUFFIX,jd.cn,DIRECT
 DOMAIN-SUFFIX,jdcloud.com,DIRECT
