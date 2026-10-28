@@ -1,10 +1,12 @@
 #!name=魔戒 HY2 对齐 Mac
-#!desc=强制 Grok/Cursor/xAI 走 hy2自动选择；须叠在魔戒订阅上（勿单独当完整配置）。变慢时手动选香港HK-HY2
+#!desc=叠在魔戒订阅上用。HY2 测速优选；HY2 不可用时自动回落到 PROXY/直连，避免空组断网。
 #!system=ios
 
 [Proxy Group]
-hy2自动选择 = url-test,url=http://www.gstatic.com/generate_204,interval=30,tolerance=30,timeout=3,policy-regex-filter=(?i)HY2
-HY2自动选择 = url-test,url=http://www.gstatic.com/generate_204,interval=30,tolerance=30,timeout=3,policy-regex-filter=(?i)HY2
+# 先筛 HY2 节点做测速；外层 fallback 保证筛不到/全挂时仍能走 PROXY 或直连
+hy2节点 = url-test,url=http://www.gstatic.com/generate_204,interval=30,tolerance=30,timeout=3,policy-regex-filter=(?i)HY2
+hy2自动选择 = fallback,hy2节点,PROXY,DIRECT,url=http://www.gstatic.com/generate_204,interval=30,timeout=3
+HY2自动选择 = fallback,hy2节点,PROXY,DIRECT,url=http://www.gstatic.com/generate_204,interval=30,timeout=3
 
 [Rule]
 DOMAIN-SUFFIX,cursor.sh,hy2自动选择
